@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block body %}
+    <div>
+        {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+        <form method="post" enctype="multipart/form-data" action="{{url_for('create')}}" >
+            <table cellspacing="10px" cellpadding="10%"; align="center">
+                <tr>
+                <td><h4> Add participants</h4></td>
+                <td align="left">
+                    <input type="email" multiple name="emails" id="emails" list="drawfemails" required size="64">
+
+                    <datalist id="drawfemails">
+                        <option value="p1@woodworkers.com">Person 1</option>
+                        <option value="p2@woodworkers.com">Person 2</option>
+                        <option value="p3@woodworkers.com">Person 3</option>
+                        <option value="p4@woodworkers.com">Person 4</option>
+                        <option value="p5@woodworkers.com">Person 5</option>
+                      </datalist>
+                    
+                      <!--<div class="multiselect">
+                        <div class="selectBox" onclick="showCheckboxes()">
+                          <select>
+                            <option>Select participants</option>
+                          </select>
+                          <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxes">
+                          <label for="one">
+                            <input type="checkbox" id="one" name="emails" value="p1@woodworkers.com" />Person 1</label>
+                          <label for="two">
+                            <input type="checkbox" id="two" name="emails" value="p2@woodworkers.com"  />Person 2</label>
+                          <label for="three">
+                            <input type="checkbox" id="three" name="emails" value="p3@woodworkers.com"   />Person 3</label>
+                            <label for="four">
+                                <input type="checkbox" id="three" name="emails" value="p4@woodworkers.com"   />Person 4</label>
+                                <label for="five">
+                                    <input type="checkbox" id="three" name="emails" value="p5@woodworkers.com"   />Person 5</label>
+                        </div>
+                      </div>-->
+                        
+                </td>
+            </tr>
+            <tr>
+                <td><h4> Start time</h4></td>
+                <td align="left">
+                <input type="text" id="start" name="st" value="00:00:00" >
+                
+                </td>
+            </tr>
+            <tr>
+                <td><h4> End time</h4></td>
+                <td align="left">
+                <input type="text" id="end" name="en" value="00:00:00" >
+                
+                </td>
+            </tr>
+            
+           
+            </table>
+            <br>
+            <button type="submit" class="btn btn-light btn-lg" >Create</button>
+        </form>
+    </div>
+    <br>
+    
+
+
+    
+    <script type="text/javascript">  
+        var expanded = false;
+        function showCheckboxes() {
+            var checkboxes = document.getElementById("checkboxes");
+            if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+            } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+            }
+        }
+        function ValidateSelection()  
+        {  
+            var checkboxes = document.getElementsByName("emails");  
+            var numberOfCheckedItems = 0;  
+            for(var i = 0; i < checkboxes.length; i++)  
+            {  
+                if(checkboxes[i].checked)  
+                    numberOfCheckedItems++;  
+            }  
+            if(numberOfCheckedItems < 2)  
+            {  
+                alert("You can't select less than two participants!");  
+                return false;  
+            }  
+        }  
+    </script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="jquery.flexdatalist.min.js"></script>
+    <script>
+    $('.flexdatalist-json').flexdatalist({
+         searchContain: false,
+         valueProperty: 'iso2',
+         minLength: 2,
+         focusFirstResult: true,
+         selectionRequired: true,
+    });
+    </script>
+    <style>
+        body {
+            
+            background-image: url('/static/bg2.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+            padding: 0px;
+        }
+        .container{
+            color: bisque;
+        }
+        header {
+            background-color: rgb(239, 116, 255);
+            padding: 8px;
+            text-align: center;
+            font-size: 35px;
+            color: white;
+            }
+        .he {
+            background-color: rgb(89, 4, 158);
+            padding: 8px;
+            text-align: center;
+            font-size: 20px;
+            color: rgb(7, 0, 0);
+            }
+        #research {
+            font-size: 18px;
+            width: 100px;
+            height: 23px;
+            top: 23px;
+        }
+        
+        #box {
+            border-radius: 60px;
+            border-color: 45px;
+            border-style: solid;
+            font-family: cursive;
+            text-align: center;
+            background-color: rgb(168, 131, 61);
+            font-size: medium;
+            position: absolute;
+            width: 700px;
+            bottom: 9%;
+            height: 850px;
+            right: 30%;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+        }
+        
+        #fuel {
+            width: 83px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #fuel:hover {
+            background-color: coral;
+        }
+        
+        #research {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #research:hover {
+            background-color: coral;
+        }
+        
+        #resea {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #resea:hover {
+            background-color: coral;
+        }
+        
+        #sub {
+            width: 120px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #sub:hover {
+            background-color: darkcyan;
+        }
+        
+        #first {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #second {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #third {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #fourth {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        .button {
+        background-color: #f19fbb; 
+        border: none;
+        color: rgb(22, 5, 83);
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin: 4px 2px;
+        margin-right: 50px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        }
+
+        table, th, td {
+        border: 1px solid rgb(19, 2, 117);
+        }
+
+        .btn:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        .multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+    </style>
+
+{% endblock %}
